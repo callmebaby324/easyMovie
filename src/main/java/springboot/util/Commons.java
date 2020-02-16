@@ -13,6 +13,7 @@ import springboot.service.ISiteService;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,7 +52,7 @@ public class Commons {
      * @return
      */
     public static String site_url() {
-        return site_url("/page/1");
+        return site_url("/pages/1");
     }
 
     public static String site_index() {
@@ -205,6 +206,13 @@ public class Commons {
         return fmtdate(unixTime, "yyyy-MM-dd");
     }
 
+    public static String transferYear(Date date){
+        return new SimpleDateFormat("yyyy").format(date);
+    }
+
+    public static String transferDate(Date date){
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
+    }
     /**
      * 格式化unix时间戳为日期
      *

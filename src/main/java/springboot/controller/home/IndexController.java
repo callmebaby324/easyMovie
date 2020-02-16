@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import springboot.constant.WebConst;
 import springboot.controller.AbstractController;
 import springboot.controller.helper.ExceptionHelper;
+import springboot.dao.MovieMapper;
 import springboot.dto.MetaDto;
 import springboot.dto.Types;
 import springboot.exception.TipException;
@@ -21,6 +22,7 @@ import springboot.modal.bo.RestResponseBo;
 import springboot.modal.vo.CommentVo;
 import springboot.modal.vo.ContentVo;
 import springboot.modal.vo.MetaVo;
+import springboot.modal.vo.Movie;
 import springboot.service.*;
 import springboot.util.IpUtil;
 import springboot.util.MyUtils;
@@ -57,6 +59,9 @@ public class IndexController extends AbstractController {
     @Resource
     private ISiteService siteService;
 
+    @Autowired
+    private IMovieService movieService;
+
 
     /**
      * 博客首页
@@ -67,7 +72,19 @@ public class IndexController extends AbstractController {
      */
     @GetMapping(value = "/")
     private String index(HttpServletRequest request, @RequestParam(value = "limit", defaultValue = "10") int limit) {
-        return this.index(request, 1, limit);
+        return this.index2(request, 1, limit);
+    }
+
+    @GetMapping(value = "pages/{p}")
+    public String index2(HttpServletRequest request, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "10") int limit) {
+        // 开启thymeleaf缓存，加快访问速度
+        p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
+        PageInfo<Movie> movies = movieService.getMovies(p, limit);
+        request.setAttribute("movies", movies);
+        if (p > 1) {
+            this.title(request, "第" + p + "页");
+        }
+        return this.render("index2");
     }
 
     /**
@@ -90,6 +107,19 @@ public class IndexController extends AbstractController {
             this.title(request, "第" + p + "页");
         }
         return this.render("index");
+    }
+
+    @Resource
+    private MovieMapper movieMapper;
+
+    @GetMapping(value = {"movie/{id}", "article/{cid}.html"})
+    public String getMovie(HttpServletRequest request, @PathVariable String id) {
+        Movie movie = movieMapper.selectByPrimaryKey(Integer.parseInt(id));
+        if (null == movie) {
+            return this.render_404();
+        }
+        request.setAttribute("movie", movie);
+        return this.render("page_movie");
     }
 
     /**

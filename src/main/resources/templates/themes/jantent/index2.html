@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="themes/jantent/header::header(null,null)"></div>
+<body>
+
+<div class="am-g am-g-fixed blog-fixed index-page">
+    <div class="am-u-md-8 am-u-sm-12">
+        <div th:each="movie: ${movies.list}">
+            <article class="am-g blog-entry-article">
+                <div class="am-u-lg-9 am-u-md-12 am-u-sm-12 blog-entry-text">
+                    <div >
+                        <a th:text="${movie.name}+'【豆瓣'+${movie.point}+'分】'+
+                        ${movie.info}" th:href="'/movie/'+${movie.id}"/>
+                    </div>
+                    <div >
+                        <small th:text="${movie.country}"></small>&nbsp;
+                        <small th:text="${movie.catogery}"></small>&nbsp;&nbsp;
+                        <small th:text="'导演:'+${movie.director}"></small>&nbsp;
+                        <small th:text="'主演:'+${movie.actor}"></small>&nbsp;
+                        <small><a th:href="${movie.download}">[点击下载]</a></small>
+                    </div>
+                    <div >
+                        <!-- 文章摘要-->
+                        <small th:utext="${movie.content}"></small>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-12 am-u-sm-12 blog-entry-text">
+                    <img th:src="${movie.headImg}" class="am-u-sm-12">
+                </div>
+            </article>
+
+        </div>
+
+        <div class="am-pagination">
+            <div th:replace="comm/macros::pageNav(${movies},'←','→','page')"></div>
+        </div>
+    </div>
+
+
+    <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
+    </div>
+</div>
+</body>
+
+<div th:replace="themes/jantent/footer::footer"></div>
+</html>

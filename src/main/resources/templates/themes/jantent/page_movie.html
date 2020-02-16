@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="themes/jantent/header::header(${movie.name},null)"></div>
+<body>
+<article class="main-content post-page">
+    <div class="post-header">
+        <h1 class="post-title" itemprop="name headline" th:text="${movie.name}+'__'+${movie.info}"></h1>
+        <div class="post-data">
+            <time th:datetime="${commons.transferDate(movie.createTime)}"
+                  itemprop="datePublished" th:text="'发布于 '+ ${commons.transferDate(movie.createTime)}">
+            </time>
+        </div>
+        <small th:text="'豆瓣评分：'+${movie.point}"></small><br />
+        <small th:text="'国别：'+${movie.country}"></small><br />
+        <small th:text="'类型：'+${movie.catogery}"></small><br />
+        <small th:text="'导演：'+${movie.director}"></small><br />
+        <small th:text="'主演：'+${movie.actor}"></small><br />
+        <small th:text="'上映日期：'+${commons.transferDate(movie.year)}"></small><br />
+    </div><br />
+    <div id="post-content" class="post-content" th:utext="${commons.article(movie.content)}"></div>
+    <div class="post-content">
+        <small><a th:href="${movie.download}">点击下载[利刃出鞘1080p.中英字幕]</a></small>
+    </div>
+</article>
+<div th:replace="themes/jantent/footer::footer"></div>
+</body>
+</html>
