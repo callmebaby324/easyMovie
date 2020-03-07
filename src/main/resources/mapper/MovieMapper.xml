@@ -35,6 +35,7 @@
     ,
     <include refid="Blob_Column_List" />
     from t_movie
+    order by create_time desc
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
@@ -54,12 +55,12 @@
       actor, catogery, country, 
       point, `year`, create_time, 
       create_by, update_time, update_by, 
-      content)
+      content,download,info)
     values (#{name,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, 
       #{actor,jdbcType=VARCHAR}, #{catogery,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
-      #{point,jdbcType=VARCHAR}, #{year,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{point,jdbcType=VARCHAR}, #{year,jdbcType=TIMESTAMP}, now(),
       #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{content,jdbcType=LONGVARCHAR},#{download},#{info})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="springboot.modal.vo.Movie" useGeneratedKeys="true">
     insert into t_movie

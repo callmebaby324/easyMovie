@@ -28,4 +28,9 @@ public class MovieServiceImpl implements IMovieService {
         PageInfo<Movie> pageInfo = new PageInfo<>(movies);
         return pageInfo;
     }
+
+    @Override
+    public void addMovie(Movie movie) {
+        movieMapper.insert(movie);
+    }
 }

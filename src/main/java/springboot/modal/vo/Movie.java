@@ -2,6 +2,7 @@ package springboot.modal.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -54,6 +55,7 @@ public class Movie implements Serializable {
      * 上映日期
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date year;
 
     @JsonFormat(pattern = "yyyy-MM-dd")

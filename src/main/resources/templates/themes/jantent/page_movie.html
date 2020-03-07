@@ -19,7 +19,7 @@
     </div><br />
     <div id="post-content" class="post-content" th:utext="${commons.article(movie.content)}"></div>
     <div class="post-content">
-        <small><a th:href="${movie.download}">点击下载[利刃出鞘1080p.中英字幕]</a></small>
+        <small><a th:href="${movie.download}" th:text="'[点击下载]'+${movie.name}+'1080P'"></a></small>
     </div>
 </article>
 <div th:replace="themes/jantent/footer::footer"></div>
