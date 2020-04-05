@@ -47,9 +47,15 @@ public class MovieManageController {
             //图片上传位置
             String path = MovieManageController.class.getClassLoader().getResource("static/img").getPath();
             //获取文件名加后缀
+            System.out.println(request);
+            System.out.println(path);
             String fileName = file.getOriginalFilename();
             File file1 = new File(path);
             File targetFile = new File(file1,fileName);
+
+            File file2 = new File("./");
+            System.out.println("files2:"+file2.getPath());
+
             //上传
             file.transferTo(targetFile);
             String url=returnUrl+fileName;

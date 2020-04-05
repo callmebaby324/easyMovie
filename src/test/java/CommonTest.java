@@ -1,7 +1,7 @@
 import org.junit.Test;
-import org.mockito.cglib.core.CollectionUtils;
+import springboot.util.ZipUtils;
 
-import java.text.MessageFormat;
+import java.io.File;
 import java.util.*;
 
 public class CommonTest {
@@ -35,6 +35,19 @@ public class CommonTest {
         String replace = s.replaceAll("\\{id}", "5");
         System.out.println(s);
         System.out.println(replace);
+    }
+
+    @Test
+    public void test4(){
+        Double d = 16.1;
+        Double s = d*500;
+        System.out.println(s);
+    }
+
+    @Test
+    public void test5() throws Exception{
+        String property = System.getProperty("user.dir");
+        System.out.println(property);
     }
 
 }
